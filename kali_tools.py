@@ -9,23 +9,25 @@ def program_download(program_name):# proqram yuklemek ucun <<HAZIR DEYIL>>
 	pass
 #----------------------------------------------------
 def add_source_list(source_list):# source-list dosyaya elave etmek <<HAZIR DEYIL>>
-	dosyakali=open("gedit /etc/apt/sources.list","a")
+	dosyakali=open("/etc/apt/sources.list","a")
 	dosyakali.write(source_list)
 #----------------------------------------------------
 def updatekali():
+	print("\x1b[0;30;36m")
 	os.system("apt-get update")
+	print("\x1b[0m")
 #--------------------------------------------------------
 
 def dosya_oxumaqkali():
-	dosya=open("sexsi-melumatlar.txt","r")
+	dosya=open("/etc/apt/sources.list","r")
 	dosya=dosya.read()
 	reqem=dosya.find(source_list)
 	if reqem==-1:
-		dosya=open("sexsi-melumatlar.txt","a")
+		dosya=open("/etc/apt/sources.list","a")
 		dosya.write(source_list)
-		print("\n>>> Ekleme basarili bir sekilde tamamlandi")
+		print("\n>>> Ekleme basarili bir sekilde tamamlandi\n")
 	else:
-		print("\n>>> Tebrikler  Kali source dosyalari kaynakda mevcut\n>>> Bir sonraki isleme gecin")
+		print("\n>>> Tebrikler  Kali source dosyalari kaynakda mevcut\n>>> Bir sonraki isleme gecin\n")
 #------------------------------------------------------------
 def islemkali():
 	mevcut=1
@@ -33,38 +35,42 @@ def islemkali():
 	os.system("clear")
 	a=1
 	print(robort)
+	gorsellik=""
 	while True:
-		giriwkali=input("""
-\x1b[0;30;33m
-1) Add Kali Linux source.list
+		giriwkali=input("""{}
+\x1b[0;30;33m1) Add Kali Linux source.list
 2) Update 
 3) Kali Linux Tools
 4) Help
 \x1b[0;30;31m99) EXIT\x1b[0m \x1b[0;30;33m
-:""")
+:""".format(gorsellik))
 		giriwkali=giriwkali.strip()
 		if not giriwkali:
-			print(">>> Bir islem secin")
+			print("\n>>> Bir islem secin\n")
 		elif giriwkali=="1":
 			mevcut=2
 			dosya_oxumaqkali()
 		elif giriwkali=="2":
-			mevcut2=2
-			updatekali()
+			if mevcut==2:
+				mevcut2=2
+				updatekali()
+			else:
+				print("\n>>> Ilk once 1-ci islemi yapmaniz tavsiye edilir ==> \"1) Add Kali Linux source.list\"\n")
 		elif giriwkali=="4":
 			helpkali()
 		elif giriwkali=="99":
-			print(">>> Tessekkur edirik")
+			print("\n>>> Tessekkur edirik\n")
 			exit()
 		elif giriwkali=="3":
 			if mevcut==1:
-				print("\n>>> Ilk once 1-ci islemi yapmaniz tavsiye edilir ==> \"1) Add Kali Linux source.list\"")
+				print("\n>>> Ilk once 1-ci islemi yapmaniz tavsiye edilir ==> \"1) Add Kali Linux source.list\"\n")
 			elif mevcut==2 and mevcut2==1:
-				print("\n>>> Guncelleme yapilmadi ==>\"2) Update\"")
+				print("\n>>> Guncelleme yapilmadi ==>\"2) Update\"\n")
 			elif mevcut==2 and mevcut2==2:
 				butun()
+				gorsellik="==========================================="
 		else:
-			print("\n>>> Listeye uyqun islem secin")
+			print("\n>>> Listeye uyqun islem secin\n")
 #-----------------------------------------------------
 def helpkali():
 	helpkali="""
@@ -399,8 +405,11 @@ def reporting_tools():
 	emeliyyat(arac13)
 #-----------------------------------------------------------
 def butun():
+	goster=""
+	goster2=""
 	os.system("clear")
-	arachamsi="""
+	while True:
+		arachamsi="""
 \x1b[0;30;35m==================KALI LINUX TOOLS==================\x1b[0m\n
 \x1b[0;30;33m1) Reporting_tools
 2) Reverse_engineering
@@ -417,90 +426,102 @@ def butun():
 13) Information_gathering
 \x1b[0;30;31m99) EXIT\x1b[0m \x1b[0;30;36m
 
->>> :"""
-	while True:
+>>> {}{}:""".format(goster,goster2)
+		os.system("clear")
 		giriwhamsi=input(arachamsi)
 		if not giriwhamsi:
-			print(">>> Bir islem secin")
+			goster2="Bir islem secin\n"
+			goster=""
 		elif giriwhamsi=="1":
-			os.system("clear")
-			
+			goster2=""
+			goster=""
+			os.system("clear")	
 			reporting_tools()
 		elif giriwhamsi=="2":
+			goster2=""
+			goster=""
 			os.system("clear")
 			reverse_engineering()
 		elif giriwhamsi=="3":
+			goster2=""
+			goster=""
 			os.system("clear")
 			hardware_hacking()
 		elif giriwhamsi=="4":
+			goster2=""
+			goster=""
 			os.system("clear")
 			maintaining_access()
 		elif giriwhamsi=="5":
+			goster2=""
+			goster=""
 			os.system("clear")
 			password_attacks()
 		elif giriwhamsi=="6":
+			goster2=""
+			goster=""
 			os.system("clear")
 			sniffing_spoofing()
 		elif giriwhamsi=="7":
+			goster2=""
+			goster=""
 			os.system("clear")
 			stress_testing()
 		elif giriwhamsi=="8":
+			goster2=""
+			goster=""
 			os.system("clear")
 			web_applications()
 		elif giriwhamsi=="9":
+			goster2=""
+			goster=""
 			os.system("clear")
 			forensics_tools()
 		elif giriwhamsi=="10":
+			goster2=""
+			goster=""
 			os.system("clear")
 			exploitation_tools()
 		elif giriwhamsi=="11":
+			goster2=""
+			goster=""
 			os.system("clear")
 			wireless_attacks()
 		elif giriwhamsi=="12":
+			goster2=""
+			goster=""
 			os.system("clear")
 			vulnerablitiy_analysis()
 		elif giriwhamsi=="13":
+			goster2=""
+			goster=""
 			os.system("clear")
 			information_gathering()
 		elif giriwhamsi=="99":
-			print("\n>>> Tesekkur ederiz")
+			os.system("clear")
 			break
 		else:
-			print("\n>>>Listeye uyqun islem secin\n")
+			goster="Listeye uyqun islem secin\n"
 			continue
 #---------------------------------------------------------------
-robort=""" \x1b[0;30;32m               
-                          ########                  #
-                      #################            #
-                   ######################         #
-                  #########################      #
-                ############################
-               ##############################
-               ###############################
-              ###############################
-              ##############################
-                              #    ########   #
+arac=r"""
+$$\   $$\           $$\ $$\    $$\        $$\                      ___    ____
+$$ | $$  |          $$ |\__|   $$ |       \__|          __    __   $$ \   $$ /
+$$ |$$  /  $$$$$$\  $$ |$$\    $$ |       $$\ $$$$$$$\  $$\   $$\   $$ \ $$ /
+$$$$$  /   \____$$\ $$ |$$ |   $$ |       $$ |$$  __$$\ $$ |  $$ |   $$ $$ / 
+$$  $$<     $$$$$$ |$$ |$$ |   $$ |       $$ |$$ |  $$ |$$ |__$$ |    $$$ |
+$$ |\$$\   $$  _$$ |$$ |$$ |   $$ |       $$ |$$ |  $$ |$$    $$ |   $$ $$ \
+$$ | \$$\  \$$$$$$ |$$ |$$ |   $$$$$$$$$\ $$ |$$ |  $$ |$$$$$$$$ |  $$ / $$ \
+\__|  \___\ \______|\__|\__|   \_________\\__|\__|  \__|\________| $$_/   $$_\
+"""
+robort="""\x1b[0;30;36m[]================================[]
+	Yapimci >>> Efrahim.B
+[]================================[]\x1b[0m
+ \x1b[0;30;32m               
 
-               \x1b[0;30;31m ##        ### \x1b[0m  \x1b[0;30;32m    ####   ##
-                                      ###   ###
-                                    ####   ###
-               ####          ##########   ####
-               #######################   ####
-                 ####################   ####
-                  ##################  ####
-                    ############      ##
-                       ########        ###
-                      #########        #####
-                    ############      ######
-                   ########      #########
-                     #####       ########
-                       ###       #########
-                      ######    ############
-                     #######################
-                     #   #   ###  #   #   ##
-                     ########################
-                      ##     ##   ##     ##
-================================================================\x1b[0m"""
+               \x1b[0;30;36m{}\x1b[0m  \x1b[0;30;32m
+
+=============================================================""".format(arac)
 #-----------------------------------------------------------------
 def kali_linux_tools():
 	pass
